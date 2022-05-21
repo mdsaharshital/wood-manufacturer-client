@@ -23,6 +23,7 @@ module.exports = {
           error: "#FA5C5C",
         },
       },
+      "corporate",
     ],
   },
   plugins: [require("daisyui")],
