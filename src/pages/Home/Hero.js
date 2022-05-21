@@ -11,6 +11,7 @@ const Hero = () => {
         background: `url(${hero1})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }}
     >
       <img src={logo} alt="" />
