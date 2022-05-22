@@ -1,0 +1,83 @@
+[
+    {
+    "name":"AMAZON ROSEWOOD",
+    "price":110,
+    "image":"https://i.ibb.co/52Pjr9j/product1.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Rosewood is one of the most exploited species of trees around the world, as it is used in making luxurious furniture, musical instruments, as well as producing rosewood oil, bringing its species to the brink of extinction.",
+    "categories": "Mahogany, Teak"
+},
+    {
+    "name":"BLACK & WHITE EBONY",
+    "price":130,
+    "image":"https://i.ibb.co/TBCqS1r/product2.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Black and White Ebony is an exotic wood with color that is reported to vary with species, usually uniformly black with light-colored bands, pale to medium brown zones, or with marked contrast between almost white and black wood. The black heartwood is reported to be more brittle than the lighter colored sapwood.",
+    "categories": "Teak, Walnut"
+},
+    {
+    "name":"FIGURED PURPLEHEART",
+    "price":120,
+    "image":"https://i.ibb.co/xgdZcd3/product3.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Figured Purpleheart is an exotic wood with mechanical properties of the wood similar to those of Greenheart and Oak. It is reported to have exceptional tolerance for shock loading. Purpleheart is highly desired by hobbyists and craftsmen who use the hard heavy wood in small projects.",
+    "categories": "Teak"
+},
+    {
+    "name":"HONEY LOCUST BURL",
+    "price":115,
+    "image":"https://i.ibb.co/rspkgH7/product4.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Honey locusts are deciduous and bear compound leaves, often with numerous leaflets. The plants characteristically feature stout, sometimes branching thorns on the trunks and branches. The greenish unisexual flowers are typically inconspicuous and are borne in branching inflorescences (flower clusters).",
+    "categories": "Teak, Walnut"
+},
+    {
+    "name":"MACASSAR EBONY",
+    "price":130,
+    "image":"https://i.ibb.co/sKpkVpN/product5.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Macassar Ebony is an exotic wood with heartwood that is reported to be strong, very heavy, and very hard. The black heart is usually brittle, and the wood is used mostly for decorative purposes. The appearance of ebony is sometimes imitated by staining other woods, such as Hornbeam, a black color.",
+    "categories": "Mahogany, Teak"
+},
+    {
+    "name":"QUARTER SAWN RED OAK",
+    "price":110,
+    "image":"https://i.ibb.co/2qgXYzY/product6.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Red Oak heartwood is similar to other oaks and coloration runs from a light tan to pink with a reddish tinge. The wood is predominantly straight grained and coarse textured. Red Oak has a somewhat less attractive figure than White Oak due to smaller rays.",
+    "categories": "Cherry, Teak"
+},
+    {
+    "name":"RIFT SAWN HARD MAPLE",
+    "price":135,
+    "image":"https://i.ibb.co/JBBqnV6/product7.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"A rift cut grain gives a contemporary twist to all-purpose hard maple. Minimal contrast and tight linear grain that characterize rift cut veneers make this timeless species feel fresh and modern in its natural coloration as well as prefinished shades of gray.",
+    "categories": "Oak, Teak"
+},
+    {
+    "name":"WESTERN MAPLE BURL",
+    "price":120,
+    "image":"https://i.ibb.co/GxhhgW5/product8.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Maple burl is a growth on the big leaf maple tree, Acer macrophyllum. It has a uniform color with dramatic figure representing large eyes. Popular for pool cues an other turnery, this wood machines and finishes well.",
+    "categories": "Maple, Teak"
+},
+    {
+    "name":"YELLOWHEART BOARDS",
+    "price":190,
+    "image":"https://i.ibb.co/gdq6Ptd/product9.jpg",
+    "minimum_order_quantity":50,
+    "available_quantity":500,
+    "description":"Heartwood color ranges from pale to golden yellow, darkening only slightly with age. Sapwood is a pale yellow/white.Grain is usually straight, though some figured pieces may have wavy or interlocked grain. Fine uniform texture and a naturally high luster.",
+    "categories": "Teak"
+}
+]

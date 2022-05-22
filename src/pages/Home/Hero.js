@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div
-      className="h-screen flex flex-col justify-center items-center gap-9 bg-center bg-cover	"
+      className="h-screen flex flex-col justify-center items-center gap-9 "
       style={{
         background: `url(${hero1})`,
         backgroundSize: "cover",
