@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import SentionTitle from "./../../components/SentionTitle";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -20,14 +22,37 @@ const ProductDetails = () => {
     description,
     image,
   } = data;
-  console.log(name);
+  const handleDelivery = (e) => {
+    e.preventDefault();
+    const orderedQuantity = parseInt(e.target.inputqquantity.value);
+    if (
+      orderedQuantity >= minimum_order_quantity &&
+      orderedQuantity <= available_quantity
+    ) {
+      const newQuantity = parseInt(available_quantity) - orderedQuantity;
+      const quantity = { newQuantity };
+      async function GoDeliver() {
+        const { data } = await axios.post(
+          `http://localhost:5000/product/${id}`,
+          quantity
+        );
+        if (data?.success) {
+          toast.success(data?.message);
+        }
+      }
+      GoDeliver();
+      refetch();
+    } else {
+      toast.error("Maintain minimum order and available quantity");
+    }
+  };
   return (
     <div>
       <SentionTitle>Buy Our Products</SentionTitle>
       {/* <h1 className="text-center text-3xl"> </h1> */}
       <div class="card lg:card-side bg-base-100 shadow-xl m-5 md:w-5/6 md:mx-auto">
         <figure>
-          <img src={image} alt="Album" />
+          <img src={image} className="h-full" alt="Album" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">{name}</h2>
@@ -43,19 +68,27 @@ const ProductDetails = () => {
             </small>
           </p>
           <div class="card-actions mt-4 justify-center lg:justify-end ">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Enter SQF</span>
-              </label>
-              <label class="input-group">
-                <input
-                  type="text"
-                  placeholder="Minimum 10SQF"
-                  class="input input-bordered"
-                />
-                <span className="bg-primary text-white ">Order</span>
-              </label>
-            </div>
+            <form onSubmit={handleDelivery}>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Enter SQF</span>
+                </label>
+                <label class="input-group">
+                  <input
+                    name="inputqquantity"
+                    type="text"
+                    placeholder="Minimum 50 SQF"
+                    class="input input-bordered"
+                    required
+                  />
+                  <input
+                    type="submit"
+                    value="Order"
+                    className="bg-primary text-white cursor-pointer px-4"
+                  />
+                </label>
+              </div>
+            </form>
           </div>
         </div>
       </div>
