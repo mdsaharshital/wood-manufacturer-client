@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SocialLogin from "./SocialLogin";
 import {
   useAuthState,
@@ -9,6 +9,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import SentionTitle from "./../../components/SentionTitle";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import Loading from "../shared/Loading";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -25,11 +27,29 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = () => {};
-  const handlePassReset = () => {};
+  const onSubmit = async (data) => {
+    await signInWithEmailAndPassword(data.email, data.password);
+  };
+  const handlePassReset = () => {
+    if (email) {
+      sendPasswordResetEmail(email);
+      toast.success("Reset password send to your email address");
+    } else {
+      toast.error("Please, provide your email address");
+    }
+  };
+  // navigate
+  useEffect(() => {
+    if (getUser) {
+      navigate(from, { replace: true });
+    }
+  }, [getUser, from, navigate]);
+
+  if (loading || sending) {
+    return <Loading />;
+  }
   return (
     <div className="py-5">
       <SentionTitle>Sign In</SentionTitle>
@@ -37,7 +57,6 @@ const SignIn = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative z-0 w-full mb-6 group">
             <input
-              onChange={(e) => setEmail(e.target.value)}
               type="email"
               name="email"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -52,6 +71,7 @@ const SignIn = () => {
                   message: "Provide a valid email",
                 },
               })}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label
               htmlFor="floating_email"

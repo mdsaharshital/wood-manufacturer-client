@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SocialLogin from "./SocialLogin";
 import {
   useAuthState,
@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("");
   const [getUser] = useAuthState(auth);
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,9 +24,9 @@ const SignUp = () => {
   } = useForm();
   let from = location.state?.from?.pathname || "/";
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, , loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [updateProfile, updating] = useUpdateProfile(auth);
   const [sendEmailVerification] = useSendEmailVerification(auth);
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
@@ -37,10 +36,10 @@ const SignUp = () => {
   };
   // navigate
   useEffect(() => {
-    if (user) {
+    if (getUser) {
       navigate(from, { replace: true });
     }
-  }, [user, from, navigate]);
+  }, [getUser, from, navigate]);
 
   if (loading || updating) {
     return <Loading />;
@@ -77,7 +76,6 @@ const SignUp = () => {
           </div>
           <div className="relative z-0 w-full mb-6 group">
             <input
-              onChange={(e) => setEmail(e.target.value)}
               type="email"
               name="email"
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
