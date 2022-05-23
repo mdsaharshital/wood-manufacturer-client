@@ -1,19 +1,38 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, Outlet } from "react-router-dom";
 import logoimg from "../asstes/images/logoImg.png";
+import auth from "./../firebase.init";
+import Loading from "./../pages/shared/Loading";
 
 const Navbar = ({ children }) => {
+  const [user, loading] = useAuthState(auth);
+  const logout = () => {
+    signOut(auth);
+  };
+  if (loading) return <Loading />;
   const menuBars = (
     <>
       <li className="mr-2 ">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="mr-2 ">
-        <NavLink to="/blog">Blog</NavLink>
-      </li>
-      <li className="mr-2 ">
-        <NavLink to="/blog">Blog</NavLink>
-      </li>
+      {user ? (
+        <li className="mr-2 ">
+          <NavLink to="/" onClick={logout}>
+            Sign out
+          </NavLink>
+        </li>
+      ) : (
+        <li className="mr-2 ">
+          <NavLink to="/signin">Login</NavLink>
+        </li>
+      )}
+      {user && (
+        <li className="mr-2 ">
+          <span>{user?.displayName}</span>
+        </li>
+      )}
       <li className="mr-2">
         <NavLink to="/blog">Blog</NavLink>
       </li>
