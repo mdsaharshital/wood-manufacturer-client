@@ -1,40 +1,80 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SocialLogin from "./SocialLogin";
 import {
   useAuthState,
-  useSendPasswordResetEmail,
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
+  useSendEmailVerification,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import SentionTitle from "./../../components/SentionTitle";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import Loading from "../shared/Loading";
 
-const SignIn = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [getUser] = useAuthState(auth);
   const navigate = useNavigate();
   const location = useLocation();
-
-  let from = location.state?.from?.pathname || "/";
-
-  const [signInWithEmailAndPassword, , loading, error] =
-    useSignInWithEmailAndPassword(auth);
-
-  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = () => {};
-  const handlePassReset = () => {};
+  let from = location.state?.from?.pathname || "/";
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+  const [sendEmailVerification] = useSendEmailVerification(auth);
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    await sendEmailVerification();
+    toast.success("Email verfication sent");
+  };
+  // navigate
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, from, navigate]);
+
+  if (loading || updating) {
+    return <Loading />;
+  }
   return (
     <div className="py-5">
-      <SentionTitle>Sign In</SentionTitle>
+      <SentionTitle>Sign Up</SentionTitle>
       <div className="full-form w-full md:w-1/2 p-4 mx-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="relative z-0 w-full mb-6 group">
+            <input
+              type="text"
+              name="name"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              {...register("name", {
+                required: {
+                  value: true,
+                  message: "Name is Required",
+                },
+              })}
+            />
+            <label
+              htmlFor="floating_email"
+              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            >
+              Your Name
+            </label>
+            {errors.name?.type === "required" && (
+              <span className="label-text-alt text-red-500">
+                {errors?.name?.message}
+              </span>
+            )}
+          </div>
           <div className="relative z-0 w-full mb-6 group">
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -57,7 +97,7 @@ const SignIn = () => {
               htmlFor="floating_email"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Email address
+              Email Address
             </label>
             {errors.email?.type === "required" && (
               <span className="label-text-alt text-red-500">
@@ -72,11 +112,6 @@ const SignIn = () => {
           </div>
           <div className="relative z-0 w-full mb-6 group">
             <input
-              type="password"
-              name="password"
-              id="floating_password"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              placeholder=" "
               {...register("password", {
                 required: {
                   value: true,
@@ -87,6 +122,11 @@ const SignIn = () => {
                   message: "Password must be atleast 6 character or longer",
                 },
               })}
+              type="password"
+              name="password"
+              id="floating_password"
+              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
             />
             <label
               htmlFor="floating_password"
@@ -109,27 +149,15 @@ const SignIn = () => {
             type="submit"
             className="btn btn-primary text-white rounded-none mb-3 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            Log in
+            Sign up
           </button>
           <p>
             <small>
-              New here?{" "}
-              <Link to="/signup" className="text-primary cursor-pointer">
+              Already have an account?{" "}
+              <Link to="/signin" className="text-primary cursor-pointer">
                 {" "}
-                Sign Up now
+                Sign in now
               </Link>
-            </small>
-          </p>
-          <p>
-            <small>
-              Forgot password?{" "}
-              <span
-                onClick={handlePassReset}
-                className="text-primary cursor-pointer"
-              >
-                {" "}
-                Click here
-              </span>
             </small>
           </p>
           {error && (
@@ -144,4 +172,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
