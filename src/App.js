@@ -9,7 +9,6 @@ import SignIn from "./pages/SignInSignUp/SignIn";
 import SignUp from "./pages/SignInSignUp/SignUp";
 import RequieAuth from "./pages/shared/RequieAuth";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import DashboardSideBar from "./pages/Dashboard/DashboardSideBar";
 import MyOrders from "./pages/Dashboard/MyOrders";
 import MyReview from "./pages/Dashboard/MyReview";
 import MyProfile from "./pages/Dashboard/MyProfile";

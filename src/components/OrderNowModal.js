@@ -41,6 +41,7 @@ const OrderNowModal = (props) => {
           name,
           estimatedPrice,
           orderedQuantity,
+          status: "pending",
         };
         const { data: info } = await axios.post(
           `http://localhost:5000/orderInfo`,
