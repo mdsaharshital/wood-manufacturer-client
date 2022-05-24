@@ -8,6 +8,11 @@ import { ToastContainer } from "react-toastify";
 import SignIn from "./pages/SignInSignUp/SignIn";
 import SignUp from "./pages/SignInSignUp/SignUp";
 import RequieAuth from "./pages/shared/RequieAuth";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import DashboardSideBar from "./pages/Dashboard/DashboardSideBar";
+import MyOrders from "./pages/Dashboard/MyOrders";
+import MyReview from "./pages/Dashboard/MyReview";
+import MyProfile from "./pages/Dashboard/MyProfile";
 
 function App() {
   return (
@@ -21,6 +26,12 @@ function App() {
           {/* -------private route here------- */}
           <Route element={<RequieAuth />}>
             <Route path="/product/:id" element={<ProductDetails />}></Route>
+            {/* // dashboard routes */}
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route path="myorders" element={<MyOrders />}></Route>
+              <Route path="myreviews" element={<MyReview />}></Route>
+              <Route path="myprofile" element={<MyProfile />}></Route>
+            </Route>
           </Route>
         </Routes>
         <ToastContainer />
