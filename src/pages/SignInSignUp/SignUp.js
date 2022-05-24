@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SocialLogin from "./SocialLogin";
 import {
   useAuthState,
@@ -12,8 +12,11 @@ import SentionTitle from "./../../components/SentionTitle";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
+import axios from "axios";
 
 const SignUp = () => {
+  const [imageURL, setImageURL] = useState("");
+  const [imgLoading, setimgLoading] = useState(false);
   const [getUser] = useAuthState(auth);
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,11 +31,33 @@ const SignUp = () => {
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating] = useUpdateProfile(auth);
   const [sendEmailVerification] = useSendEmailVerification(auth);
+  //
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({ displayName: data.name });
+    await updateProfile({ displayName: data.name, photoURL: imageURL });
     await sendEmailVerification();
     toast.success("Email verfication sent");
+  };
+  const handleIamgeUpload = (e) => {
+    e.preventDefault();
+    setimgLoading(true);
+    const image = e.target.files[0];
+    console.log(image);
+    const formData = new FormData();
+    formData.set("image", image);
+    axios
+      .post(
+        "https://api.imgbb.com/1/upload?key=1acbd73a4a8ebea34491d15e22f67080",
+        formData
+      )
+      .then((res) => {
+        setimgLoading(false);
+        console.log(res.data.data);
+        setImageURL(res.data.data.display_url);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   // navigate
   useEffect(() => {
@@ -142,6 +167,30 @@ const SignUp = () => {
                 {errors.password.message}
               </span>
             )}
+          </div>
+          <div className="relative z-0 w-1/2 mb-6 group">
+            <div className="form-control">
+              <label htmlFor="uploadImage" className="label">
+                <span
+                  className={
+                    imgLoading
+                      ? "label-text btn btn-primary  text-white loading rounded-none mt-4"
+                      : "label-text btn btn-primary  text-white rounded-none mt-4"
+                  }
+                >
+                  Upload Image
+                </span>
+              </label>
+              <input
+                required
+                onChange={handleIamgeUpload}
+                id="uploadImage"
+                type="file"
+                name="image"
+                placeholder="Upload a Image"
+                className="input input-bordered hidden"
+              />
+            </div>
           </div>
           <button
             type="submit"
