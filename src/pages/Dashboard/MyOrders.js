@@ -37,37 +37,35 @@ const MyOrders = () => {
           </thead>
           <tbody>
             {/* <!-- row 1 --> */}
-            {data.map(
-              (
-                { _id, name, estimatedPrice, orderedQuantity, status },
-                index
-              ) => (
-                <tr key={index}>
-                  <th>1</th>
-                  <td>{name}</td>
-                  <td>{estimatedPrice}</td>
-                  <td>{orderedQuantity}</td>
-                  <td>
-                    {status === "pending" ? (
-                      <>
-                        <Link to="/payment" className="text-error">
-                          {status}
-                        </Link>
-                        <label
-                          onClick={() => handleHasProduct({ _id, name })}
-                          for="my-modal-6"
-                          class="text-success cursor-pointer ml-3"
-                        >
-                          Cancel
-                        </label>
-                      </>
-                    ) : (
-                      <span className="text-success">{status}</span>
-                    )}
-                  </td>
-                </tr>
-              )
-            )}
+            {data.map((product, index) => (
+              <tr key={index}>
+                <th>1</th>
+                <td>{product.name}</td>
+                <td>{product.estimatedPrice}</td>
+                <td>{product.orderedQuantity}</td>
+                <td>
+                  {product.status === "pending" ? (
+                    <>
+                      <Link
+                        to={`/payment/${product._id}`}
+                        className="text-error"
+                      >
+                        Pay Now
+                      </Link>
+                      <label
+                        onClick={() => handleHasProduct(product)}
+                        for="my-modal-6"
+                        class="text-success cursor-pointer ml-3"
+                      >
+                        Cancel
+                      </label>
+                    </>
+                  ) : (
+                    <span className="text-success">{product.status}</span>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
           {isModalOpen && (
             <DeleteModal

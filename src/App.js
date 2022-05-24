@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import MyOrders from "./pages/Dashboard/MyOrders";
 import MyReview from "./pages/Dashboard/MyReview";
 import MyProfile from "./pages/Dashboard/MyProfile";
+import Payment from "./pages/Payment/Payment";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           {/* -------private route here------- */}
           <Route element={<RequieAuth />}>
             <Route path="/product/:id" element={<ProductDetails />}></Route>
+            <Route path="/payment/:id" element={<Payment />}></Route>
             {/* // dashboard routes */}
             <Route path="/dashboard" element={<Dashboard />}>
               <Route path="myorders" element={<MyOrders />}></Route>

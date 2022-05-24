@@ -76,3 +76,11 @@
     font-size: 12px;
     text-align: center;
   }
+  .the-card{
+    width: 350px;
+    background: var(--glass);
+    padding: 2rem 3rem;
+    margin: 2rem ;
+    box-shadow: var(--boxShadow);
+
+  }
