@@ -40,12 +40,15 @@ const SignIn = () => {
       toast.error("Please, provide your email address");
     }
   };
+
+  const token = localStorage.getItem("accessToken");
+
   // navigate
   useEffect(() => {
-    if (getUser) {
+    if (token && getUser) {
       navigate(from, { replace: true });
     }
-  }, [getUser, from, navigate]);
+  }, [token, getUser, from, navigate]);
 
   if (loading || sending) {
     return <Loading />;

@@ -11,6 +11,7 @@ const Navbar = ({ children }) => {
   const { pathname } = useLocation();
   const logout = () => {
     signOut(auth);
+    localStorage.removeItem("accessToken");
   };
   if (loading) return <Loading />;
   const menuBars = (

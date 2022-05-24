@@ -59,12 +59,13 @@ const SignUp = () => {
         console.log(error);
       });
   };
+  const token = localStorage.getItem("accessToken");
   // navigate
   useEffect(() => {
-    if (getUser) {
+    if (token && getUser) {
       navigate(from, { replace: true });
     }
-  }, [getUser, from, navigate]);
+  }, [token, getUser, from, navigate]);
 
   if (loading || updating) {
     return <Loading />;
