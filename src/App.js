@@ -13,6 +13,11 @@ import MyOrders from "./pages/Dashboard/MyOrders";
 import MyReview from "./pages/Dashboard/MyReview";
 import MyProfile from "./pages/Dashboard/MyProfile";
 import Payment from "./pages/Payment/Payment";
+import RequireAdmin from "./pages/shared/RequireAdmin";
+import AddAProduct from "./pages/Dashboard/AdminRoutes/AddAProduct";
+import ManageProducts from "./pages/Dashboard/AdminRoutes/ManageProducts";
+import ManageAllOrders from "./pages/Dashboard/AdminRoutes/ManageAllOrders";
+import MakeAdmin from "./pages/Dashboard/AdminRoutes/MakeAdmin";
 
 function App() {
   return (
@@ -32,6 +37,19 @@ function App() {
               <Route path="myorders" element={<MyOrders />}></Route>
               <Route path="myreviews" element={<MyReview />}></Route>
               <Route path="myprofile" element={<MyProfile />}></Route>
+              {/* admin route */}
+              <Route element={<RequireAdmin />}>
+                <Route path="addaproduct" element={<AddAProduct />}></Route>
+                <Route
+                  path="manageproducts"
+                  element={<ManageProducts />}
+                ></Route>
+                <Route
+                  path="manageallorders"
+                  element={<ManageAllOrders />}
+                ></Route>
+                <Route path="makeAdmin" element={<MakeAdmin />}></Route>
+              </Route>
             </Route>
           </Route>
         </Routes>
