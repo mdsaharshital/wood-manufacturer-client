@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import SentionTitle from "./../../components/SentionTitle";
-import { toast } from "react-toastify";
-import axios from "axios";
 import Loading from "../shared/Loading";
+import OrderNowModal from "../../components/OrderNowModal";
 
 const ProductDetails = () => {
-  const [estimatedPrice, setEestimatedPrice] = useState(0);
+  const [hasProduct, setHasProduct] = useState(null);
   const { id } = useParams();
   const { data, isLoading, refetch } = useQuery(["products", id], () =>
     fetch(`http://localhost:5000/product/${id}`).then((res) => res.json())
   );
+
   if (isLoading) return <Loading />;
   const {
-    _id,
     name,
     price,
     minimum_order_quantity,
@@ -23,34 +22,14 @@ const ProductDetails = () => {
     description,
     image,
   } = data;
-  const handleDelivery = (e) => {
-    e.preventDefault();
-    const orderedQuantity = parseInt(e.target.inputqquantity.value);
-    if (
-      orderedQuantity >= minimum_order_quantity &&
-      orderedQuantity <= available_quantity
-    ) {
-      const newQuantity = parseInt(available_quantity) - orderedQuantity;
-      const quantity = { newQuantity };
-      async function GoDeliver() {
-        const { data } = await axios.post(
-          `http://localhost:5000/product/${id}`,
-          quantity
-        );
-        if (data?.success) {
-          toast.success(data?.message);
-        }
-      }
-      GoDeliver();
-      refetch();
-    } else {
-      toast.error("Maintain minimum order and available quantity");
-    }
+  const handleHasProduct = () => {
+    setHasProduct(data);
   };
+
   return (
     <div>
       <SentionTitle>Buy Our Products</SentionTitle>
-      {/* <h1 className="text-center text-3xl"> </h1> */}
+
       <div class="card lg:card-side bg-base-100 shadow-xl m-5 md:w-5/6 md:mx-auto">
         <figure>
           <img src={image} className="h-full" alt="Album" />
@@ -69,34 +48,22 @@ const ProductDetails = () => {
             </small>
           </p>
           <div class="card-actions mt-4 justify-center lg:justify-end ">
-            <form onSubmit={handleDelivery}>
-              <div class="form-control">
-                <label class="label">
-                  <span class="label-text">Enter SQF</span>
-                  <span class="label-text">
-                    Estimated price: {estimatedPrice || 0}
-                  </span>
-                </label>
-                <label class="input-group">
-                  <input
-                    name="inputqquantity"
-                    type="text"
-                    placeholder="Minimum 50 SQF"
-                    class="input input-bordered"
-                    required
-                    onChange={(e) => {
-                      const newPrice = parseInt(e.target.value) * price;
-                      setEestimatedPrice(newPrice);
-                    }}
-                  />
-                  <input
-                    type="submit"
-                    value="Order"
-                    className="bg-primary text-white cursor-pointer px-4"
-                  />
-                </label>
-              </div>
-            </form>
+            <div class="form-control">
+              <label
+                onClick={handleHasProduct}
+                for="order-now-modal"
+                class="btn btn-primary text-white rounded-none"
+              >
+                Order Now
+              </label>
+              {hasProduct && (
+                <OrderNowModal
+                  productDetails={data}
+                  refetch={refetch}
+                  setHasProduct={setHasProduct}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
