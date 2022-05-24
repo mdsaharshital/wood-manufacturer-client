@@ -108,7 +108,11 @@ const OrderNowModal = (props) => {
               className="input rounded-none input-bordered w-full max-w-xs"
             />
             <input
-              disabled={minimumOrder < 50 || isNaN(minimumOrder)}
+              disabled={
+                minimumOrder < minimum_order_quantity ||
+                minimumOrder > available_quantity ||
+                isNaN(minimumOrder)
+              }
               type="submit"
               value="Place Order"
               className="btn btn-primary rounded-none text-white w-full max-w-xs"

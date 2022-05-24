@@ -10,7 +10,7 @@ const RequieAuth = () => {
   if (loading) return <Loading />;
 
   if (!user) {
-    return <Navigate to="/signup" state={{ from: location }} replace />;
+    return <Navigate to="/signin" state={{ from: location }} replace />;
   }
   return <Outlet />;
 };

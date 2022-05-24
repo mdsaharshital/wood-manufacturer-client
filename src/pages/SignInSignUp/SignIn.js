@@ -11,6 +11,8 @@ import SentionTitle from "./../../components/SentionTitle";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
+import { fetcher } from "../../hooks/fetcher";
+import useToken from "../../hooks/useToken";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -31,6 +33,9 @@ const SignIn = () => {
   } = useForm();
   const onSubmit = async (data) => {
     await signInWithEmailAndPassword(data.email, data.password);
+    const { data: accessToken } = await fetcher.post("login", getUser?.email);
+    localStorage.setItem("accessToken", accessToken);
+    console.log(accessToken);
   };
   const handlePassReset = () => {
     if (email) {
@@ -41,11 +46,10 @@ const SignIn = () => {
     }
   };
 
-  const token = localStorage.getItem("accessToken");
-
+  const [token] = useToken(getUser);
   // navigate
   useEffect(() => {
-    if (token && getUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
   }, [token, getUser, from, navigate]);

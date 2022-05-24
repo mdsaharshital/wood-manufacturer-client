@@ -5,15 +5,26 @@ import { Link } from "react-router-dom";
 import DeleteModal from "../../components/DeleteModal";
 import auth from "../../firebase.init";
 import Loading from "../shared/Loading";
+import { toast } from "react-toastify";
+import { signOut } from "firebase/auth";
 
 const MyOrders = () => {
   const [isModalOpen, setIsModalOpen] = useState(null);
   const [product, setProduct] = useState("");
   const [user] = useAuthState(auth);
   const { data, isLoading, refetch } = useQuery(["products", user?.email], () =>
-    fetch(`http://localhost:5000/myorders?email=${user?.email}`).then((res) =>
-      res.json()
-    )
+    fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => {
+      if (res.status === 401 || res.status === 403) {
+        signOut(auth);
+        localStorage.removeItem("accessToken");
+        return toast.error("Unauthentic user");
+      }
+      return res.json();
+    })
   );
   if (isLoading) return <Loading />;
   const handleHasProduct = (pro) => {

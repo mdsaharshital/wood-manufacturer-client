@@ -13,6 +13,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
 import axios from "axios";
+import { fetcher } from "../../hooks/fetcher";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
   const [imageURL, setImageURL] = useState("");
@@ -36,6 +38,9 @@ const SignUp = () => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name, photoURL: imageURL });
     await sendEmailVerification();
+    const { data: accessToken } = await fetcher.post("login", getUser?.email);
+    localStorage.setItem("accessToken", accessToken);
+    console.log(accessToken);
     toast.success("Email verfication sent");
   };
   const handleIamgeUpload = (e) => {
@@ -59,10 +64,11 @@ const SignUp = () => {
         console.log(error);
       });
   };
-  const token = localStorage.getItem("accessToken");
+  
+  const [token] = useToken(getUser);
   // navigate
   useEffect(() => {
-    if (token && getUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
   }, [token, getUser, from, navigate]);

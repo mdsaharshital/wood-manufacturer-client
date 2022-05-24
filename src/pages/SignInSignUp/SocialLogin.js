@@ -4,34 +4,31 @@ import auth from "../../firebase.init";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Loading from "./../shared/Loading";
-import axios from "axios";
 import { fetcher } from "./../../hooks/fetcher";
+import useToken from "./../../hooks/useToken";
 
 const SocialLogin = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
   const [signInWithGoogle, user, googleLoading, googleError] =
     useSignInWithGoogle(auth);
   const [getUser] = useAuthState(auth);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const handleSignIn = async () => {
-    await signInWithGoogle();
-    const { data } = await fetcher.post("login", getUser?.email);
-    localStorage.setItem("accessToken", data);
-    console.log(data);
-  };
-  let from = location.state?.from?.pathname || "/";
   //
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate(from, { replace: true });
-  //   }
-  // }, [user, from, navigate]);
+  const [token] = useToken(getUser);
+  // navigate
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, getUser, from, navigate]);
   if (googleLoading) return <Loading />;
   return (
     <div class="flex flex-col w-full border-opacity-50">
       <div class="divider">OR</div>
       <button
-        onClick={handleSignIn}
+        onClick={() => signInWithGoogle()}
         className="btn btn-primary text-white w-3/4 mx-auto rounded-none"
       >
         Sign in with Google
