@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import SentionTitle from "./../../components/SentionTitle";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Loading from "../shared/Loading";
 
 const ProductDetails = () => {
+  const [estimatedPrice, setEestimatedPrice] = useState(0);
   const { id } = useParams();
   const { data, isLoading, refetch } = useQuery(["products", id], () =>
     fetch(`http://localhost:5000/product/${id}`).then((res) => res.json())
   );
-  console.log(data);
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   const {
     _id,
     name,
@@ -72,6 +73,9 @@ const ProductDetails = () => {
               <div class="form-control">
                 <label class="label">
                   <span class="label-text">Enter SQF</span>
+                  <span class="label-text">
+                    Estimated price: {estimatedPrice || 0}
+                  </span>
                 </label>
                 <label class="input-group">
                   <input
@@ -80,6 +84,10 @@ const ProductDetails = () => {
                     placeholder="Minimum 50 SQF"
                     class="input input-bordered"
                     required
+                    onChange={(e) => {
+                      const newPrice = parseInt(e.target.value) * price;
+                      setEestimatedPrice(newPrice);
+                    }}
                   />
                   <input
                     type="submit"

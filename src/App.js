@@ -7,6 +7,7 @@ import ProductDetails from "./pages/Home/ProductDetails";
 import { ToastContainer } from "react-toastify";
 import SignIn from "./pages/SignInSignUp/SignIn";
 import SignUp from "./pages/SignInSignUp/SignUp";
+import RequieAuth from "./pages/shared/RequieAuth";
 
 function App() {
   return (
@@ -14,10 +15,13 @@ function App() {
       <Navbar>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/product/:id" element={<ProductDetails />}></Route>
           <Route path="/blog" element={<Blog />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          {/* -------private route here------- */}
+          <Route element={<RequieAuth />}>
+            <Route path="/product/:id" element={<ProductDetails />}></Route>
+          </Route>
         </Routes>
         <ToastContainer />
       </Navbar>
