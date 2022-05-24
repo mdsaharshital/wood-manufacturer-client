@@ -42,6 +42,10 @@ const OrderNowModal = (props) => {
           estimatedPrice,
           orderedQuantity,
         };
+        const { data: info } = await axios.post(
+          `http://localhost:5000/orderInfo`,
+          userOrderInfo
+        );
       }
       UserInfo();
       GoDeliver();
