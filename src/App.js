@@ -18,6 +18,7 @@ import AddAProduct from "./pages/Dashboard/AdminRoutes/AddAProduct";
 import ManageProducts from "./pages/Dashboard/AdminRoutes/ManageProducts";
 import ManageAllOrders from "./pages/Dashboard/AdminRoutes/ManageAllOrders";
 import MakeAdmin from "./pages/Dashboard/AdminRoutes/MakeAdmin";
+import NotFound from "./pages/shared/NotFound";
 
 function App() {
   return (
@@ -52,6 +53,8 @@ function App() {
               </Route>
             </Route>
           </Route>
+
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <ToastContainer />
       </Navbar>
