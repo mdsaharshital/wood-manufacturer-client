@@ -1,9 +1,12 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, Outlet } from "react-router-dom";
 import useAdmin from "./../../hooks/useAdmin";
+import auth from "./../../firebase.init";
 
 const DashboardSideBar = ({ children }) => {
-  const [isAdmin] = useAdmin();
+  const [user] = useAuthState(auth);
+  const [isAdmin] = useAdmin(user);
   return (
     <div class="drawer drawer-mobile">
       <input

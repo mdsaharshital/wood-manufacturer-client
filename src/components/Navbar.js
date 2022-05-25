@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import logoimg from "../asstes/images/logoImg.png";
 import auth from "./../firebase.init";
 import Loading from "./../pages/shared/Loading";
@@ -9,8 +9,11 @@ import Loading from "./../pages/shared/Loading";
 const Navbar = ({ children }) => {
   const [user, loading] = useAuthState(auth);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const logout = () => {
     signOut(auth);
+    // navigate
+    // navigate("/signin");
     localStorage.removeItem("accessToken");
   };
   if (loading) return <Loading />;
@@ -77,7 +80,11 @@ const Navbar = ({ children }) => {
               for="dashboard-sidebar-menu"
               className="text-center w-full  flex justify-center"
             >
-              <img src={logoimg} className="text-center block w-24 " alt="" />
+              <img
+                src={logoimg}
+                className="text-center block w-20 py-2"
+                alt=""
+              />
             </span>
           </div>
           <div class="flex-none lg:hidden">

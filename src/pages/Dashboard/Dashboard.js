@@ -5,7 +5,7 @@ import DashboardSideBar from "./DashboardSideBar";
 const Dashboard = ({ children }) => {
   return (
     <DashboardSideBar>
-      <SentionTitle>Dashboard</SentionTitle>
+      {/* <SentionTitle>Dashboard</SentionTitle> */}
     </DashboardSideBar>
   );
 };
