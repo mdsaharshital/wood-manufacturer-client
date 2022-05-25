@@ -161,7 +161,7 @@ const SignIn = () => {
           </p>
           {error && (
             <p>
-              <small className="text-danger">{error?.message}</small>
+              <small className="text-red-500">{error?.message}</small>
             </p>
           )}
         </form>
