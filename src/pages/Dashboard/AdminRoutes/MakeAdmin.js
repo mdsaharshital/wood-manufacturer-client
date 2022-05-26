@@ -77,7 +77,7 @@ const MakeAdmin = () => {
                   {user.role === "admin" || (
                     <button
                       onClick={() => handleAdmin(user?.email)}
-                      className="btn btn-sm "
+                      className="btn btn-sm btn-primary text-white rounded-none"
                     >
                       Make Admin
                     </button>
