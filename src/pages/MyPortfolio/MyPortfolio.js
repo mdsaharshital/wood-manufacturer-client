@@ -30,8 +30,8 @@ const MyPortfolio = () => {
           <p className="text-center text-xl my-10 text-primary">
             My skills as a web developer
           </p>
-          <div class="flex justify-center">
-            <table class="table w-1/2">
+          <div className="flex justify-center">
+            <table className="table w-1/2">
               <thead>
                 <tr>
                   <th>FrontEnd</th>

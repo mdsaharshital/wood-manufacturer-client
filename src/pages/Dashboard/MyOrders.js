@@ -37,8 +37,8 @@ const MyOrders = () => {
   return (
     <div className="p-4">
       <h1 className="text-xl">My orders: {data.length}</h1>
-      <div class="overflow-x-auto">
-        <table class="table table-zebra w-full">
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>
@@ -71,7 +71,7 @@ const MyOrders = () => {
                       <label
                         onClick={() => handleHasProduct(product)}
                         for="my-modal-6"
-                        class="text-success cursor-pointer ml-3"
+                        className="text-success cursor-pointer ml-3"
                       >
                         Cancel
                       </label>

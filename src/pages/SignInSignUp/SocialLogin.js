@@ -25,8 +25,8 @@ const SocialLogin = () => {
   }, [token, getUser, from, navigate]);
   if (googleLoading) return <Loading />;
   return (
-    <div class="flex flex-col w-full border-opacity-50">
-      <div class="divider">OR</div>
+    <div className="flex flex-col w-full border-opacity-50">
+      <div className="divider">OR</div>
       <button
         onClick={() => signInWithGoogle()}
         className="btn btn-primary text-white w-3/4 mx-auto rounded-none"

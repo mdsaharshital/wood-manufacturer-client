@@ -9,22 +9,22 @@ const DashboardSideBar = ({ children }) => {
   const [user] = useAuthState(auth);
   const [isAdmin] = useAdmin(user);
   return (
-    <div class="drawer drawer-mobile">
+    <div className="drawer drawer-mobile">
       <input
         id="dashboard-sidebar-menu"
         type="checkbox"
-        class="drawer-toggle"
+        className="drawer-toggle"
       />
-      <div class="drawer-content ">
+      <div className="drawer-content ">
         {/* <!-- Page content here --> */}
         {children}
         <Outlet />
 
         <Footer />
       </div>
-      <div class="drawer-side">
-        <label for="dashboard-sidebar-menu" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
+      <div className="drawer-side">
+        <label for="dashboard-sidebar-menu" className="drawer-overlay"></label>
+        <ul className="menu p-4 overflow-y-auto w-48 bg-base-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
           {isAdmin || (
             <>

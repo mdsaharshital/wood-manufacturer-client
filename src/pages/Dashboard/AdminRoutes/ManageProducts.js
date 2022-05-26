@@ -27,8 +27,8 @@ const ManageProducts = () => {
   return (
     <div>
       <SentionTitle>Manage Products</SentionTitle>
-      <div class="overflow-x-auto m-3 mb-10">
-        <table class="table table-zebra w-full">
+      <div className="overflow-x-auto m-3 mb-10">
+        <table className="table table-zebra w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>

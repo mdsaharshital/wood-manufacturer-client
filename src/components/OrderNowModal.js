@@ -57,16 +57,16 @@ const OrderNowModal = (props) => {
   };
   return (
     <div>
-      <input type="checkbox" id="order-now-modal" class="modal-toggle" />
-      <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
+      <input type="checkbox" id="order-now-modal" className="modal-toggle" />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
           <label
             htmlFor="order-now-modal"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
-          <h3 class="font-bold text-lg">Product Name : {name}</h3>
+          <h3 className="font-bold text-lg">Product Name : {name}</h3>
           <form
             onSubmit={handleDelivery}
             className="mt-10 grid grid-cols-1 justify-items-center gap-3"

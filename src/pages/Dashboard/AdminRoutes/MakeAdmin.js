@@ -51,8 +51,8 @@ const MakeAdmin = () => {
     <div>
       <SentionTitle>Make Admin</SentionTitle>
       <h1 className="text-xl p-3 ">Total users: {data.length}</h1>
-      <div class="overflow-x-auto p-3">
-        <table class="table table-zebra w-full">
+      <div className="overflow-x-auto p-3">
+        <table className="table table-zebra w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>
