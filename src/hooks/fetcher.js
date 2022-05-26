@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const fetcher = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://hidden-crag-61724.herokuapp.com/",
 });

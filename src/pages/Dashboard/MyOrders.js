@@ -47,6 +47,7 @@ const MyOrders = () => {
               <th>Price</th>
               <th>Quantity</th>
               <th>Payment Status</th>
+              <th>Transaction ID</th>
             </tr>
           </thead>
           <tbody>
@@ -57,6 +58,7 @@ const MyOrders = () => {
                 <td>{product.name}</td>
                 <td>{product.estimatedPrice}</td>
                 <td>{product.orderedQuantity}</td>
+
                 <td>
                   {product.status === "pending" ? (
                     <>
@@ -78,6 +80,14 @@ const MyOrders = () => {
                     <span className="text-success">{product.status}</span>
                   )}
                 </td>
+                {product?.paid && (
+                  <td>
+                    {" "}
+                    <small className="text-primary ml-3">
+                      {product.transactionId}
+                    </small>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

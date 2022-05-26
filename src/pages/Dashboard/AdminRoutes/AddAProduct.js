@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import SentionTitle from "../../../components/SentionTitle";
 import auth from "../../../firebase.init";
-import { fetcher } from "../../../hooks/fetcher";
 
 const AddAProduct = () => {
   const [user] = useAuthState(auth);

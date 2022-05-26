@@ -1,41 +1,100 @@
+import React, { useState, useEffect } from "react";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
 import { toast } from "react-toastify";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ data }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [cardError, setCardError] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
 
-  const handleSubmit = async (event) => {
-    // Block native form submission.
-    event.preventDefault();
+  const {
+    _id,
+    name,
+    displayName,
+    email,
+    status,
+    estimatedPrice,
+    orderedQuantity,
+  } = data;
+
+  useEffect(() => {
+    fetch("http://localhost:5000/create-payment-intent", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify({ estimatedPrice }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.clientSecret) {
+          console.log(clientSecret);
+          setClientSecret(data.clientSecret);
+        }
+      });
+  }, [estimatedPrice]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
 
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
     const card = elements.getElement(CardElement);
 
     if (card == null) {
       return;
     }
 
-    // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
+    setCardError(error?.message || "");
+    // confirm card payment
+    const { paymentIntent, error: intentError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: displayName,
+          },
+        },
+      });
 
-    if (error) {
-      toast.error(error);
-      console.log("[error]", error);
+    if (intentError) {
+      setCardError(intentError?.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      setCardError("");
+      toast.success("Congrats, your payment is successfully completed");
+      setTransactionId(paymentIntent.id);
+
+      // booking update
+      const payment = {
+        productID: _id,
+        transactionId: paymentIntent.id,
+        estimatedPrice,
+        name,
+        orderedQuantity,
+        status: "paid",
+        email,
+        paid: true,
+      };
+      fetch(`http://localhost:5000/booking/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(payment),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
     }
   };
 
@@ -57,7 +116,11 @@ const CheckoutForm = () => {
           },
         }}
       />
-      <button type="submit" disabled={!stripe}>
+      <button
+        type="submit"
+        className="btn btn-primary btn-sm text-white rounded-none"
+        disabled={!stripe}
+      >
         Pay
       </button>
     </form>

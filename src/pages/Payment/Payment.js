@@ -7,6 +7,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 
+const stripePromise = loadStripe(`${process.env.REACT_APP_PAYMENT_KEY}`);
+
 const Payment = () => {
   const { id } = useParams();
   const { data, isLoading } = useQuery(["products", id], () =>
@@ -17,7 +19,7 @@ const Payment = () => {
   if (isLoading) return <Loading />;
 
   const { name, estimatedPrice, orderedQuantity } = data;
-  const stripePromise = loadStripe(`${process.env.REACT_APP_PAYMENT_KEY}`);
+  console.log(data);
   return (
     <div>
       <SentionTitle>Pay Now for: {name}</SentionTitle>
@@ -28,7 +30,7 @@ const Payment = () => {
         </div>
         <div className="the-card">
           <Elements stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm data={data} />
           </Elements>
         </div>
       </div>
