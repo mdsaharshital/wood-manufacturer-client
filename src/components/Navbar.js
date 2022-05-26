@@ -32,6 +32,9 @@ const Navbar = ({ children }) => {
       <li className="mr-2 ">
         <NavLink to="/blog">Blog</NavLink>
       </li>
+      <li className="mr-2 ">
+        <NavLink to="/myportfolio">My portfolio</NavLink>
+      </li>
       {user ? (
         <li className="mr-2 ">
           <span onClick={logout}>Sign out</span>

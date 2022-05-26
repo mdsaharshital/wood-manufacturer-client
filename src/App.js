@@ -19,6 +19,7 @@ import ManageProducts from "./pages/Dashboard/AdminRoutes/ManageProducts";
 import ManageAllOrders from "./pages/Dashboard/AdminRoutes/ManageAllOrders";
 import MakeAdmin from "./pages/Dashboard/AdminRoutes/MakeAdmin";
 import NotFound from "./pages/shared/NotFound";
+import MyPortfolio from "./pages/MyPortfolio/MyPortfolio";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/blog" element={<Blog />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/myportfolio" element={<MyPortfolio />}></Route>
           {/* -------private route here------- */}
           <Route element={<RequieAuth />}>
             <Route path="/product/:id" element={<ProductDetails />}></Route>

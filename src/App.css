@@ -14,6 +14,15 @@
 .jossTw svg{
     margin: 0 auto;
 }
+.card-img-cont{
+  transition: 0.3s all;
+  aspect-ratio: 1/1;
+  width: 120px;
+  border-radius: 50%;
+}
+.card-img-cont:hover{
+  transform: scale(1.1);
+}
 /* ------------ */
 .full-form{
   background: var(--glass);
