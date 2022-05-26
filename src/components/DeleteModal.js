@@ -8,7 +8,9 @@ const DeleteModal = ({ setIsModalOpen, refetch, product }) => {
   };
   const { _id } = product;
   const handleDelete = async (id) => {
-    const { data } = await axios.delete(`http://localhost:5000/myorders/${id}`);
+    const { data } = await axios.delete(
+      `https://hidden-crag-61724.herokuapp.com/myorders/${id}`
+    );
     if (data.success) {
       refetch();
       toast.success(data.message);

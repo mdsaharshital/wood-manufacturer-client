@@ -13,11 +13,14 @@ const MyOrders = () => {
   const [product, setProduct] = useState("");
   const [user] = useAuthState(auth);
   const { data, isLoading, refetch } = useQuery(["products", user?.email], () =>
-    fetch(`http://localhost:5000/myorders?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => {
+    fetch(
+      `https://hidden-crag-61724.herokuapp.com/myorders?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => {
       if (res.status === 401 || res.status === 403) {
         signOut(auth);
         localStorage.removeItem("accessToken");

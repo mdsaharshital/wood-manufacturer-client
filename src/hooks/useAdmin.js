@@ -8,7 +8,7 @@ const useAdmin = (user) => {
   const [adminLoading, setAdminLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/admin/${user?.email}`, {
+    fetch(`https://hidden-crag-61724.herokuapp.com/admin/${user?.email}`, {
       method: "get",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

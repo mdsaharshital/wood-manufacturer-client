@@ -15,7 +15,7 @@ const AddAProduct = () => {
     const email = user.email;
     const newProduct = { ...data, email };
     console.log(newProduct);
-    fetch("http://localhost:5000/addproduct", {
+    fetch("https://hidden-crag-61724.herokuapp.com/addproduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",

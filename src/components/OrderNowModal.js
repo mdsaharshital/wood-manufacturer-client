@@ -24,7 +24,7 @@ const OrderNowModal = (props) => {
       const quantity = { newQuantity };
       async function GoDeliver() {
         const { data } = await axios.post(
-          `http://localhost:5000/product/${_id}`,
+          `https://hidden-crag-61724.herokuapp.com/product/${_id}`,
           quantity
         );
         if (data?.success) {
@@ -44,7 +44,7 @@ const OrderNowModal = (props) => {
           status: "pending",
         };
         const { data: info } = await axios.post(
-          `http://localhost:5000/orderInfo`,
+          `https://hidden-crag-61724.herokuapp.com/orderInfo`,
           userOrderInfo
         );
       }

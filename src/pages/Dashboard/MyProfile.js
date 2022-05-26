@@ -21,7 +21,7 @@ const MyProfile = () => {
     const name = user.displayName;
     const userProfileData = { ...data, email, name };
     console.log(userProfileData);
-    fetch("http://localhost:5000/userProfile", {
+    fetch("https://hidden-crag-61724.herokuapp.com/userProfile", {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -41,12 +41,15 @@ const MyProfile = () => {
   };
   //
   useEffect(() => {
-    fetch(`http://localhost:5000/userProfile/${user?.email}`, {
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://hidden-crag-61724.herokuapp.com/userProfile/${user?.email}`,
+      {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((userProfile) => {
         setuserProfile(userProfile);

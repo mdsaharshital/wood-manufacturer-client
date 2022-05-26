@@ -7,7 +7,7 @@ const useToken = (user) => {
   console.log("hola", currentUser);
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/login/${user?.email}`, {
+      fetch(`https://hidden-crag-61724.herokuapp.com/login/${user?.email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

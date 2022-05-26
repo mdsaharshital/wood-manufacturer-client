@@ -10,7 +10,9 @@ import CheckoutForm from "./CheckoutForm";
 const Payment = () => {
   const { id } = useParams();
   const { data, isLoading } = useQuery(["products", id], () =>
-    fetch(`http://localhost:5000/myorders/${id}`).then((res) => res.json())
+    fetch(`https://hidden-crag-61724.herokuapp.com/myorders/${id}`).then(
+      (res) => res.json()
+    )
   );
   if (isLoading) return <Loading />;
 

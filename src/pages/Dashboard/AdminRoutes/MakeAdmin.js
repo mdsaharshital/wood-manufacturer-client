@@ -10,7 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const MakeAdmin = () => {
   const [getUser] = useAuthState(auth);
   const { data, isLoading, refetch } = useQuery("users", () =>
-    fetch("http://localhost:5000/users", {
+    fetch("https://hidden-crag-61724.herokuapp.com/users", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -26,7 +26,7 @@ const MakeAdmin = () => {
   if (isLoading) return <Loading />;
   const handleAdmin = async (email) => {
     console.log(email);
-    fetch(`http://localhost:5000/user/admin/${email}`, {
+    fetch(`https://hidden-crag-61724.herokuapp.com/user/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
