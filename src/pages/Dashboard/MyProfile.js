@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SentionTitle from "../../components/SentionTitle";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./../../firebase.init";
@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const MyProfile = () => {
   const [user] = useAuthState(auth);
   const [isEdit, setIsEdit] = useState(false);
+  const [userProfile, setuserProfile] = useState([]);
   const { register, handleSubmit, reset } = useForm();
   const handleEdit = () => {
     setIsEdit(!isEdit);
@@ -32,11 +33,25 @@ const MyProfile = () => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
+          // refetch();
           toast.success("updated successfully");
           reset();
         }
       });
   };
+  //
+  useEffect(() => {
+    fetch(`http://localhost:5000/userProfile/${user?.email}`, {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((userProfile) => {
+        setuserProfile(userProfile);
+      });
+  }, [user, isEdit]);
   return (
     <div>
       <SentionTitle>My Profile</SentionTitle>
@@ -44,11 +59,30 @@ const MyProfile = () => {
         <div className="">
           <img
             src={user?.photoURL}
-            className="rounded-full my-3 w-24 mx-auto ring ring-blue ring-offset-base-100 ring-offset-2"
+            className="rounded-full my-3 w-24 aspect-square mx-auto ring ring-blue ring-offset-base-100 ring-offset-2"
             alt=""
           />
           <h1 className="text-center mb-4">{user?.displayName}</h1>
-          <h1 className="text-center mb-4">Email: {user?.email}</h1>
+          {userProfile && (
+            <>
+              <small className="text-left mb-4 ">
+                Education: {userProfile?.education}
+              </small>
+              <br />
+              <small className="text-center mb-4">
+                Location: {userProfile?.location}
+              </small>
+              <br />
+              <small className="text-center mb-4">
+                Number: {userProfile?.phone_Number}
+              </small>
+              <br />
+              <small className="text-center mb-4">
+                LinkedIn: {userProfile?.linkedIn_profile_link}
+              </small>
+            </>
+          )}
+          <br />
         </div>
         {/* // */}
         <div className="col-span-2 w-full">
