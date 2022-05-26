@@ -5,6 +5,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import logoimg from "../asstes/images/logoImg.png";
 import auth from "./../firebase.init";
 import Loading from "./../pages/shared/Loading";
+import Footer from "./Footer";
 
 const Navbar = ({ children }) => {
   const [user, loading] = useAuthState(auth);

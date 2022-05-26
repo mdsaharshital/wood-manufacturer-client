@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import Loading from "../shared/Loading";
 import { fetcher } from "../../hooks/fetcher";
 import useToken from "../../hooks/useToken";
+import Footer from "../../components/Footer";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -60,7 +61,7 @@ const SignIn = () => {
   return (
     <div className="py-5">
       <SentionTitle>Sign In</SentionTitle>
-      <div className="full-form w-full md:w-1/2 p-4 mx-auto">
+      <div className="full-form w-full md:w-1/2 p-4 mx-auto my-10">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative z-0 w-full mb-6 group">
             <input
@@ -167,6 +168,8 @@ const SignIn = () => {
         </form>
         <SocialLogin />
       </div>
+
+      <Footer />
     </div>
   );
 };

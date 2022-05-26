@@ -20,7 +20,7 @@ const CheckoutForm = ({ data }) => {
   } = data;
 
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://hidden-crag-61724.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -83,7 +83,7 @@ const CheckoutForm = ({ data }) => {
         email,
         paid: true,
       };
-      fetch(`http://localhost:5000/booking/${_id}`, {
+      fetch(`https://hidden-crag-61724.herokuapp.com/booking/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

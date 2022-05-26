@@ -6,6 +6,7 @@ import Loading from "../shared/Loading";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import Footer from "../../components/Footer";
 
 const stripePromise = loadStripe(`${process.env.REACT_APP_PAYMENT_KEY}`);
 
@@ -34,6 +35,8 @@ const Payment = () => {
           </Elements>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

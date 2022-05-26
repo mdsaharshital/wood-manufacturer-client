@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, Outlet } from "react-router-dom";
 import useAdmin from "./../../hooks/useAdmin";
 import auth from "./../../firebase.init";
+import Footer from "../../components/Footer";
 
 const DashboardSideBar = ({ children }) => {
   const [user] = useAuthState(auth);
@@ -18,6 +19,8 @@ const DashboardSideBar = ({ children }) => {
         {/* <!-- Page content here --> */}
         {children}
         <Outlet />
+
+        <Footer />
       </div>
       <div class="drawer-side">
         <label for="dashboard-sidebar-menu" class="drawer-overlay"></label>

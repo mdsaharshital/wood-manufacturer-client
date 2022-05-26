@@ -15,6 +15,7 @@ import Loading from "../shared/Loading";
 import axios from "axios";
 import { fetcher } from "../../hooks/fetcher";
 import useToken from "../../hooks/useToken";
+import Footer from "../../components/Footer";
 
 const SignUp = () => {
   const [imageURL, setImageURL] = useState("");
@@ -64,7 +65,7 @@ const SignUp = () => {
         console.log(error);
       });
   };
-  
+
   const [token] = useToken(getUser);
   // navigate
   useEffect(() => {
@@ -79,7 +80,7 @@ const SignUp = () => {
   return (
     <div className="py-5">
       <SentionTitle>Sign Up</SentionTitle>
-      <div className="full-form w-full md:w-1/2 p-4 mx-auto">
+      <div className="full-form w-full md:w-1/2 p-4 mx-auto my-10">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="relative z-0 w-full mb-6 group">
             <input
@@ -222,6 +223,8 @@ const SignUp = () => {
         </form>
         <SocialLogin />
       </div>
+
+      <Footer />
     </div>
   );
 };
