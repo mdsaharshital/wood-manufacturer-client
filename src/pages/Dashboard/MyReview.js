@@ -13,6 +13,7 @@ import axios from "axios";
 
 const MyReview = () => {
   const [isEdit, setIsEdit] = useState(false);
+  const [ratings, setRatings] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
   const [product, setProduct] = useState([]);
   const [user] = useAuthState(auth);
@@ -41,9 +42,8 @@ const MyReview = () => {
   );
 
   const onSubmit = async (data) => {
+    console.log(data);
     const {
-      review_ratings,
-      review_description,
       displayName,
       email,
       photoURL,
@@ -55,8 +55,6 @@ const MyReview = () => {
     //
     const newReview = {
       ...data,
-      review_ratings,
-      review_description,
       displayName,
       email,
       photoURL,
@@ -127,10 +125,12 @@ const MyReview = () => {
           <h1>Share your experience with everyone </h1>
           {isEdit && isSelected ? (
             <div className="flex">
-              <GiConfirmed
-                onClick={handleSubmit(onSubmit)}
-                className="text-xl mr-3"
-              />
+              {ratings < 6 && (
+                <GiConfirmed
+                  onClick={handleSubmit(onSubmit)}
+                  className="text-xl mr-3"
+                />
+              )}
               <GiCancel className="text-xl" onClick={handleEdit} />
             </div>
           ) : (
@@ -146,14 +146,23 @@ const MyReview = () => {
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent  border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer max-w-xs"
               placeholder=" "
               required
+              onInput={(e) => {
+                let rate = parseInt(e.target.value);
+                setRatings(rate);
+              }}
               disabled={!isEdit}
-              {...register("review_ratings")}
+              {...register("review_ratings", {
+                required: {
+                  value: true,
+                  message: "Ratings is Required",
+                },
+              })}
             />
             <label
               htmlFor="floating_minimum_order_quantity"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Ratings(in number)
+              Ratings(out of 5)
             </label>
           </div>
           <div className="relative z-0 w-full mb-6 group">
@@ -165,7 +174,12 @@ const MyReview = () => {
               placeholder=" "
               required
               disabled={!isEdit}
-              {...register("review_description")}
+              {...register("review_description", {
+                required: {
+                  value: true,
+                  message: "Description is Required",
+                },
+              })}
             />
             <label
               htmlFor="floating_minimum_order_quantity"
