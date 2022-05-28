@@ -6,7 +6,6 @@ import ProductCard from "./ProductCard";
 const Products = () => {
   const [products] = useProducts();
   const [sixShow, setSixShow] = useState(6);
-  console.log(products.length);
   return (
     <div className="my-10">
       <SentionTitle>Our Products</SentionTitle>

@@ -60,7 +60,7 @@ const Navbar = ({ children }) => {
           {pathname.includes("dashboard") && (
             <div className="flex-none lg:hidden">
               <label
-                for="dashboard-sidebar-menu"
+                htmlFor="dashboard-sidebar-menu"
                 className="btn btn-square btn-ghost"
               >
                 <svg
@@ -70,9 +70,9 @@ const Navbar = ({ children }) => {
                   className="inline-block w-6 h-6 stroke-current"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M4 6h16M4 12h16M4 18h16"
                   ></path>
                 </svg>
@@ -81,7 +81,7 @@ const Navbar = ({ children }) => {
           )}
           <div className="flex-1 px-2 mx-2 uppercase lg:hidden">
             <span
-              for="dashboard-sidebar-menu"
+              htmlFor="dashboard-sidebar-menu"
               className="text-center w-full  flex justify-center"
             >
               <img
@@ -92,7 +92,7 @@ const Navbar = ({ children }) => {
             </span>
           </div>
           <div className="flex-none lg:hidden">
-            <label for="my-drawer-3" className="btn btn-square btn-ghost">
+            <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -100,9 +100,9 @@ const Navbar = ({ children }) => {
                 className="inline-block w-6 h-6 stroke-white"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h16"
                 ></path>
               </svg>
@@ -120,7 +120,7 @@ const Navbar = ({ children }) => {
         <Outlet />
       </div>
       <div className="drawer-side">
-        <label for="my-drawer-3" className="drawer-overlay"></label>
+        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-80 bg-primary text-slate-300">
           {/* <!-- Sidebar content here --> */}
           {menuBars}

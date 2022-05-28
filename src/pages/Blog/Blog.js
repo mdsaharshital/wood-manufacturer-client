@@ -50,8 +50,34 @@ const Blog = () => {
             product development life cycle, unit testing saves time and money,
             and helps developers write better code, more efficiently.
           </div>
-          <div className="px-5"></div>
-          <div className="px-5"></div>
+          <div className="px-5">
+            <h1 className="text-2xl font-bold py-5">
+              You have an array of products. Each object has a name, price,
+              description, etc. How will you implement a search to find products
+              by name?
+            </h1>
+            First of all all i need to know is the product name, when i type the
+            name and click on search button i will get the value, and while
+            mapping the array of objects, i'll give a condition to call includes
+            that will help me find the product and i'll return the wholle
+            product as a search object. thats how i can find a product by
+            searching.
+          </div>
+          <div className="px-5">
+            <h1 className="text-2xl font-bold py-5">
+              {" "}
+              Why you do not set the state directly in React. For example, if
+              you have const [products, setProducts] = useState([]). Why you do
+              not set products = [...] instead, you use the setProducts
+            </h1>
+            we cannot directly set the value of products. beacuse it is
+            immutable. we cannot set it directly . While a React component can
+            have initial state, the real power is in updating its state — after
+            all, if we didn't need to update the state, the component shouldn't
+            have any state. State is only reserved for data that changes in our
+            component and is visible in the UI. Instead of directly modifying
+            the state using this.
+          </div>
         </div>
       </div>
 

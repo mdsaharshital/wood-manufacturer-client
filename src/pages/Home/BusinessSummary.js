@@ -5,8 +5,8 @@ const BusinessSummary = () => {
   return (
     <div>
       <SentionTitle>We served hundreds</SentionTitle>
-      <div className="w-full  flex justify-center my-10">
-        <div className="stats stats-vertical lg:stats-horizontal shadow text-center">
+      <div className="w-full  flex justify-center my-10 ">
+        <div className="stats stats-vertical lg:stats-horizontal shadow full-form text-center">
           <div className="stat">
             <div className="stat-title">Customer Served</div>
             <div className="stat-value">31K</div>

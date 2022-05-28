@@ -49,7 +49,7 @@ const ManageProducts = () => {
                 <td>{product.available_quantity}</td>
                 <td>
                   <label
-                    for="my-modal-7"
+                    htmlFor="my-modal-7"
                     onClick={() => handleDeleteProduct(product._id)}
                     className="btn btn-xs btn-error rounded-none"
                   >

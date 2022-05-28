@@ -1,4 +1,5 @@
 import React from "react";
+import jojos from "../asstes/images/logoImg.png";
 
 const Footer = () => {
   return (
@@ -22,6 +23,9 @@ const Footer = () => {
         <a className="link link-hover">Terms of use</a>
         <a className="link link-hover">Privacy policy</a>
         <a className="link link-hover">Cookie policy</a>
+      </div>
+      <div className="">
+        <img src={jojos} alt="" />
       </div>
     </footer>
   );

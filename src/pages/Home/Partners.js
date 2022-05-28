@@ -32,8 +32,8 @@ const Partners = () => {
     <div className="my-10">
       <SentionTitle>Our Partners</SentionTitle>
       <div className="row p-4 g-4 mx-auto card-container grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 my-10">
-        {partners.map((testimony) => (
-          <div className="mx-auto mb-5">
+        {partners.map((testimony, index) => (
+          <div className="mx-auto mb-5" key={index}>
             <div className="mx-auto all-cards" style={{ width: "90px" }}>
               <img
                 src={testimony.image}

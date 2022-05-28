@@ -31,7 +31,7 @@ const MyPortfolio = () => {
             My skills as a web developer
           </p>
           <div className="flex justify-center">
-            <table className="table w-1/2">
+            <table className="table w-1/2 ">
               <thead>
                 <tr>
                   <th>FrontEnd</th>
@@ -70,36 +70,38 @@ const MyPortfolio = () => {
               </tbody>
             </table>
           </div>
-          <h2 className="text-center text-2xl font-bold">
+          <h2 className="text-center text-4xl font-bold my-10 text-accent">
             My most recent projects
           </h2>
-          <a
-            className="mr-4 text-xl text-primary text-center underline"
-            href="https://perfume-warehouse-17111.web.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {" "}
-            Project 1
-          </a>
-          <a
-            className="mr-4 text-xl text-primary text-center underline"
-            href="https://sheikh-mujib-photographer.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {" "}
-            Project 2
-          </a>
-          <a
-            className="mr-4 text-xl text-primary text-center underline"
-            href="https://rock-paper-scissior-by-shital.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {" "}
-            Project 3
-          </a>
+          <div className="flex justify-center">
+            <a
+              className="mr-4 text-xl text-primary text-center underline"
+              href="https://perfume-warehouse-17111.web.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Project 1
+            </a>
+            <a
+              className="mr-4 text-xl text-primary text-center underline"
+              href="https://sheikh-mujib-photographer.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Project 2
+            </a>
+            <a
+              className="mr-4 text-xl text-primary text-center underline"
+              href="https://rock-paper-scissior-by-shital.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Project 3
+            </a>
+          </div>
         </div>
       </div>
       <Footer />

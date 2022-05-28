@@ -6,9 +6,11 @@ import { signOut } from "firebase/auth";
 import auth from "../../../firebase.init";
 import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 const MakeAdmin = () => {
   const [getUser] = useAuthState(auth);
+  const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery("users", () =>
     fetch("https://hidden-crag-61724.herokuapp.com/users", {
       headers: {
@@ -18,6 +20,7 @@ const MakeAdmin = () => {
       if (res.status === 401 || res.status === 403) {
         signOut(auth);
         localStorage.removeItem("accessToken");
+        navigate("/signin");
         return toast.error("Unauthentic user");
       }
       return res.json();
@@ -66,7 +69,7 @@ const MakeAdmin = () => {
             {/* <!-- row 1 --> */}
             {data.map((user, index) => (
               <tr key={index}>
-                <th>1</th>
+                <th>{index + 1}</th>
                 <td>
                   {getUser.email === user.email
                     ? user.email + " (You)"

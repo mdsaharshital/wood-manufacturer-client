@@ -7,6 +7,7 @@ import auth from "../../firebase.init";
 import Loading from "../shared/Loading";
 import { toast } from "react-toastify";
 import { signOut } from "firebase/auth";
+import SentionTitle from "../../components/SentionTitle";
 
 const MyOrders = () => {
   const [isModalOpen, setIsModalOpen] = useState(null);
@@ -36,7 +37,7 @@ const MyOrders = () => {
   };
   return (
     <div className="p-4">
-      <h1 className="text-xl">My orders: {data.length}</h1>
+      <SentionTitle>My orders: {data.length}</SentionTitle>
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           {/* <!-- head --> */}
@@ -46,7 +47,7 @@ const MyOrders = () => {
               <th>Product Name</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th>Payment Status</th>
+              <th>Status</th>
               <th>Transaction ID</th>
             </tr>
           </thead>
@@ -70,7 +71,7 @@ const MyOrders = () => {
                       </Link>
                       <label
                         onClick={() => handleHasProduct(product)}
-                        for="my-modal-6"
+                        htmlFor="my-modal-6"
                         className="text-success cursor-pointer ml-3"
                       >
                         Cancel

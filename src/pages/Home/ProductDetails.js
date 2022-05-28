@@ -53,7 +53,7 @@ const ProductDetails = () => {
             <div className="form-control">
               <label
                 onClick={handleHasProduct}
-                for="order-now-modal"
+                htmlFor="order-now-modal"
                 className="btn btn-primary text-white rounded-none"
               >
                 Order Now
