@@ -196,7 +196,7 @@ const SignUp = () => {
                 type="file"
                 name="image"
                 placeholder="Upload a Image"
-                className="input input-bordered hidden"
+                className="w-0"
               />
             </div>
           </div>

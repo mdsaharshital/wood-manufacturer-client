@@ -41,7 +41,30 @@ const MyReview = () => {
   );
 
   const onSubmit = async (data) => {
-    const newReview = { ...data, ...product };
+    const {
+      review_ratings,
+      review_description,
+      displayName,
+      email,
+      photoURL,
+      name,
+      estimatedPrice,
+      orderedQuantity,
+      status,
+    } = product;
+    //
+    const newReview = {
+      ...data,
+      review_ratings,
+      review_description,
+      displayName,
+      email,
+      photoURL,
+      name,
+      estimatedPrice,
+      orderedQuantity,
+      status,
+    };
     const { data: update } = await axios.post(
       "https://hidden-crag-61724.herokuapp.com/addreview",
       newReview,
@@ -63,7 +86,7 @@ const MyReview = () => {
     <div className="py-10">
       <SentionTitle>My Review</SentionTitle>
       <h1 className="text-center my-4">
-        You are seeing only those product you got shipped
+        You will see only those product you got shipped.
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 justify-items-center my-5">
         {data.map((pro, index) => {
@@ -111,7 +134,7 @@ const MyReview = () => {
               <GiCancel className="text-xl" onClick={handleEdit} />
             </div>
           ) : (
-            <FaRegEdit className="text-xl" onClick={handleEdit} />
+            isSelected && <FaRegEdit className="text-xl" onClick={handleEdit} />
           )}
         </div>
         <form className="w-full my-2">
