@@ -22,7 +22,6 @@ const ManageProducts = () => {
   if (isLoading) return <Loading />;
   const handleDeleteProduct = (id) => {
     setIsModalOpen(id);
-    console.log(id);
   };
   return (
     <div>
