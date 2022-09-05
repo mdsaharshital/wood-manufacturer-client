@@ -6,6 +6,7 @@ import logoimg from "../asstes/images/logoImg.png";
 import auth from "./../firebase.init";
 import Loading from "./../pages/shared/Loading";
 import Footer from "./Footer";
+import { BiUser } from "react-icons/bi";
 
 const Navbar = ({ children }) => {
   const [user, loading] = useAuthState(auth);
@@ -46,7 +47,10 @@ const Navbar = ({ children }) => {
       )}
       {user && (
         <li className="mr-2 ">
-          <span>{user?.displayName}</span>
+          <span>
+            <BiUser />
+            {user?.displayName}
+          </span>
         </li>
       )}
     </>

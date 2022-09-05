@@ -7,7 +7,7 @@ const Testimony = () => {
     fetch("https://hidden-crag-61724.herokuapp.com/getreviews")
       .then((res) => res.json())
       .then((data) => setTestimonies(data));
-  }, [testimonies]);
+  }, []);
   return (
     <div className="my-5">
       <SentionTitle>Reviews</SentionTitle>
