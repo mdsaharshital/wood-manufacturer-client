@@ -21,14 +21,17 @@ const MyProfile = () => {
     const name = user.displayName;
     const userProfileData = { ...data, email, name };
     console.log(userProfileData);
-    fetch("https://hidden-crag-61724.herokuapp.com/userProfile", {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(userProfileData),
-    })
+    fetch(
+      "https://wood-manufacturer-server-production.up.railway.app/userProfile",
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(userProfileData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -42,7 +45,7 @@ const MyProfile = () => {
   //
   useEffect(() => {
     fetch(
-      `https://hidden-crag-61724.herokuapp.com/userProfile/${user?.email}`,
+      `https://wood-manufacturer-server-production.up.railway.app/userProfile/${user?.email}`,
       {
         headers: {
           "content-type": "application/json",

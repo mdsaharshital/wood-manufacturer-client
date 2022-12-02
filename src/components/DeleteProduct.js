@@ -10,7 +10,7 @@ const DeleteProduct = ({ setIsModalOpen, product, refetch }) => {
   //   const { _id } = product;
   const handleDelete = async (id) => {
     const { data } = await axios.delete(
-      `https://hidden-crag-61724.herokuapp.com/product/${id}`
+      `https://wood-manufacturer-server-production.up.railway.app/product/${id}`
     );
     console.log(data);
     if (data.deletedCount > 0) {

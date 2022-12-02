@@ -12,7 +12,7 @@ const MakeAdmin = () => {
   const [getUser] = useAuthState(auth);
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery("users", () =>
-    fetch("https://hidden-crag-61724.herokuapp.com/users", {
+    fetch("https://wood-manufacturer-server-production.up.railway.app/users", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -29,12 +29,15 @@ const MakeAdmin = () => {
   if (isLoading) return <Loading />;
   const handleAdmin = async (email) => {
     console.log(email);
-    fetch(`https://hidden-crag-61724.herokuapp.com/user/admin/${email}`, {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://wood-manufacturer-server-production.up.railway.app/user/admin/${email}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => {
         console.log(res.status);
         if (res.status === 403) {

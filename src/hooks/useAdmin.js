@@ -8,12 +8,15 @@ const useAdmin = (user) => {
   const [adminLoading, setAdminLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://hidden-crag-61724.herokuapp.com/admin/${user?.email}`, {
-      method: "get",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://wood-manufacturer-server-production.up.railway.app/admin/${user?.email}`,
+      {
+        method: "get",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data.admin);

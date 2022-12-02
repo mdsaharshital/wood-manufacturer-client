@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const fetcher = axios.create({
-  baseURL: "https://hidden-crag-61724.herokuapp.com/",
+  baseURL: "https://wood-manufacturer-server-production.up.railway.app/",
 });

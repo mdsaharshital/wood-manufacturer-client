@@ -25,7 +25,7 @@ const MyReview = () => {
     ["myproducts", user?.email],
     () =>
       fetch(
-        `https://hidden-crag-61724.herokuapp.com/myorders?email=${user?.email}`,
+        `https://wood-manufacturer-server-production.up.railway.app/myorders?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -64,7 +64,7 @@ const MyReview = () => {
       status,
     };
     const { data: update } = await axios.post(
-      "https://hidden-crag-61724.herokuapp.com/addreview",
+      "https://wood-manufacturer-server-production.up.railway.app/addreview",
       newReview,
       {
         headers: {

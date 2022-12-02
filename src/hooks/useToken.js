@@ -7,13 +7,16 @@ const useToken = (user) => {
   console.log("hola", currentUser);
   useEffect(() => {
     if (user?.email) {
-      fetch(`https://hidden-crag-61724.herokuapp.com/login/${user?.email}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(currentUser),
-      })
+      fetch(
+        `https://wood-manufacturer-server-production.up.railway.app/login/${user?.email}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

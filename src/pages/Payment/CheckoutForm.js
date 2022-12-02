@@ -20,14 +20,17 @@ const CheckoutForm = ({ data }) => {
   } = data;
 
   useEffect(() => {
-    fetch("https://hidden-crag-61724.herokuapp.com/create-payment-intent", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify({ estimatedPrice }),
-    })
+    fetch(
+      "https://wood-manufacturer-server-production.up.railway.app/create-payment-intent",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify({ estimatedPrice }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data?.clientSecret) {
@@ -83,14 +86,17 @@ const CheckoutForm = ({ data }) => {
         email,
         paid: true,
       };
-      fetch(`https://hidden-crag-61724.herokuapp.com/booking/${_id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify(payment),
-      })
+      fetch(
+        `https://wood-manufacturer-server-production.up.railway.app/booking/${_id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(payment),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

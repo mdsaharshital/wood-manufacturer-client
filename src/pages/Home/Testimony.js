@@ -4,7 +4,9 @@ import SentionTitle from "../../components/SentionTitle";
 const Testimony = () => {
   const [testimonies, setTestimonies] = useState([]);
   useEffect(() => {
-    fetch("https://hidden-crag-61724.herokuapp.com/getreviews")
+    fetch(
+      "https://wood-manufacturer-server-production.up.railway.app/getreviews"
+    )
       .then((res) => res.json())
       .then((data) => setTestimonies(data));
   }, []);
