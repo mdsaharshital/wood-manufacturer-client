@@ -14,17 +14,14 @@ const AddAProduct = () => {
     const email = user.email;
     const newProduct = { ...data, email };
     console.log(newProduct);
-    fetch(
-      "https://wood-manufacturer-server-production.up.railway.app/addproduct",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify(newProduct),
-      }
-    )
+    fetch("https://wood-manufacturer-server.onrender.com/addproduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(newProduct),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

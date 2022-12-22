@@ -12,7 +12,7 @@ const ManageAllOrders = () => {
   const [getUser] = useAuthState(auth);
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery("users", () =>
-    fetch("https://wood-manufacturer-server-production.up.railway.app/orders", {
+    fetch("https://wood-manufacturer-server.onrender.com/orders", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -30,15 +30,12 @@ const ManageAllOrders = () => {
   //
   const handleOrder = async (id) => {
     console.log(id);
-    fetch(
-      `https://wood-manufacturer-server-production.up.railway.app/orders/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch(`https://wood-manufacturer-server.onrender.com/orders/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => {
         console.log(res.status);
         if (res.status === 403) {

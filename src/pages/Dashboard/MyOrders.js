@@ -15,7 +15,7 @@ const MyOrders = () => {
   const [user] = useAuthState(auth);
   const { data, isLoading, refetch } = useQuery(["products", user?.email], () =>
     fetch(
-      `https://wood-manufacturer-server-production.up.railway.app/myorders?email=${user?.email}`,
+      `https://wood-manufacturer-server.onrender.com/myorders?email=${user?.email}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

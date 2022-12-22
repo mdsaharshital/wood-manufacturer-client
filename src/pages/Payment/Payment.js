@@ -13,9 +13,9 @@ const stripePromise = loadStripe(`${process.env.REACT_APP_PAYMENT_KEY}`);
 const Payment = () => {
   const { id } = useParams();
   const { data, isLoading } = useQuery(["products", id], () =>
-    fetch(
-      `https://wood-manufacturer-server-production.up.railway.app/myorders/${id}`
-    ).then((res) => res.json())
+    fetch(`https://wood-manufacturer-server.onrender.com/myorders/${id}`).then(
+      (res) => res.json()
+    )
   );
   if (isLoading) return <Loading />;
 

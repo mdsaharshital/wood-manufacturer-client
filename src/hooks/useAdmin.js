@@ -9,7 +9,7 @@ const useAdmin = (user) => {
 
   useEffect(() => {
     fetch(
-      `https://wood-manufacturer-server-production.up.railway.app/admin/${user?.email}`,
+      `https://wood-manufacturer-server.onrender.com/admin/${user?.email}`,
       {
         method: "get",
         headers: {

@@ -4,9 +4,7 @@ import SentionTitle from "../../components/SentionTitle";
 const Testimony = () => {
   const [testimonies, setTestimonies] = useState([]);
   useEffect(() => {
-    fetch(
-      "https://wood-manufacturer-server-production.up.railway.app/getreviews"
-    )
+    fetch("https://wood-manufacturer-server.onrender.com/getreviews")
       .then((res) => res.json())
       .then((data) => setTestimonies(data));
   }, []);

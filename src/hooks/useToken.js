@@ -8,7 +8,7 @@ const useToken = (user) => {
   useEffect(() => {
     if (user?.email) {
       fetch(
-        `https://wood-manufacturer-server-production.up.railway.app/login/${user?.email}`,
+        `https://wood-manufacturer-server.onrender.com/login/${user?.email}`,
         {
           method: "PUT",
           headers: {

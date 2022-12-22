@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetch("https://wood-manufacturer-server-production.up.railway.app/products")
+    fetch("https://wood-manufacturer-server.onrender.com/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

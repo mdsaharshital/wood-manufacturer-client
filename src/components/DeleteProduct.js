@@ -10,7 +10,7 @@ const DeleteProduct = ({ setIsModalOpen, product, refetch }) => {
   //   const { _id } = product;
   const handleDelete = async (id) => {
     const { data } = await axios.delete(
-      `https://wood-manufacturer-server-production.up.railway.app/product/${id}`
+      `https://wood-manufacturer-server.onrender.com/product/${id}`
     );
     console.log(data);
     if (data.deletedCount > 0) {

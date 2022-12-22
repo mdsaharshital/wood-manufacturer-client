@@ -9,9 +9,9 @@ const ProductDetails = () => {
   const [hasProduct, setHasProduct] = useState(null);
   const { id } = useParams();
   const { data, isLoading, refetch } = useQuery(["products", id], () =>
-    fetch(
-      `https://wood-manufacturer-server-production.up.railway.app/product/${id}`
-    ).then((res) => res.json())
+    fetch(`https://wood-manufacturer-server.onrender.com/product/${id}`).then(
+      (res) => res.json()
+    )
   );
 
   if (isLoading) return <Loading />;

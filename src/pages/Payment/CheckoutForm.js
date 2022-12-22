@@ -21,7 +21,7 @@ const CheckoutForm = ({ data }) => {
 
   useEffect(() => {
     fetch(
-      "https://wood-manufacturer-server-production.up.railway.app/create-payment-intent",
+      "https://wood-manufacturer-server.onrender.com/create-payment-intent",
       {
         method: "POST",
         headers: {
@@ -86,17 +86,14 @@ const CheckoutForm = ({ data }) => {
         email,
         paid: true,
       };
-      fetch(
-        `https://wood-manufacturer-server-production.up.railway.app/booking/${_id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-          body: JSON.stringify(payment),
-        }
-      )
+      fetch(`https://wood-manufacturer-server.onrender.com/booking/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(payment),
+      })
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

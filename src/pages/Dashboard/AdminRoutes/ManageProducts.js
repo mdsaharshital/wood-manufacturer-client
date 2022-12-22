@@ -13,9 +13,9 @@ const ManageProducts = () => {
     isLoading,
     refetch,
   } = useQuery("products", () =>
-    fetch(
-      "https://wood-manufacturer-server-production.up.railway.app/products"
-    ).then((res) => res.json())
+    fetch("https://wood-manufacturer-server.onrender.com/products").then(
+      (res) => res.json()
+    )
   );
 
   const [isModalOpen, setIsModalOpen] = useState(null);

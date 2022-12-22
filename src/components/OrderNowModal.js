@@ -24,7 +24,7 @@ const OrderNowModal = (props) => {
       const quantity = { newQuantity };
       async function GoDeliver() {
         const { data } = await axios.post(
-          `https://wood-manufacturer-server-production.up.railway.app/product/${_id}`,
+          `https://wood-manufacturer-server.onrender.com/product/${_id}`,
           quantity
         );
         if (data?.success) {
@@ -44,7 +44,7 @@ const OrderNowModal = (props) => {
           status: "pending",
         };
         const { data: info } = await axios.post(
-          `https://wood-manufacturer-server-production.up.railway.app/orderInfo`,
+          `https://wood-manufacturer-server.onrender.com/orderInfo`,
           userOrderInfo
         );
       }
